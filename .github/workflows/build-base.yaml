@@ -36,4 +36,4 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}:${{ matrix.platform }}
+            ghcr.io/${{ github.repository_owner }}/builder:linux-${{ matrix.platform | replace('/', '-') }}
