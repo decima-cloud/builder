@@ -38,8 +38,11 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - \
 # Bug found here -> https://github.com/hashicorp/vault/issues/10924
 RUN setcap -r /usr/bin/vault
 
+# Install Azure CLI
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
 # Install programming languages
-RUN apt-get update && apt-get install -y \
+RUN apt-get update --fix-missing && apt-get install -y \
     openjdk-11-jdk \
     openjdk-11-jre-headless \
     golang-go \
@@ -64,6 +67,7 @@ ENV PATH="/root/.cargo/bin:$PATH"
 RUN aws --version \
     && gcloud --version \
     && vault --version \
+    && az --version \
     && jq --version \
     && java -version \
     && go version \
