@@ -8,6 +8,7 @@ Builder is a base Dockerfile designed to streamline the development process by p
 - **Pre-installed tools**:
   - AWS CLI
   - Google Cloud SDK (gcloud CLI)
+  - Azure CLI
   - HashiCorp Vault
   - jq
 - **Pre-installed programming languages**:
@@ -15,6 +16,8 @@ Builder is a base Dockerfile designed to streamline the development process by p
   - Go
   - Python 3
   - Node.js and npm
+  - Ruby
+  - Rust
 - **Optimized for size**: Uses multi-stage builds to minimize the final image size.
 
 ## Usage
@@ -35,22 +38,6 @@ To run a container from the built image, use the following command:
 docker run -it builder:latest
 ```
 
-### Verifying Installed Tools
-
-The Dockerfile includes a step to verify the installation of all tools and programming languages. You can run the following commands inside the container to check the versions:
-
-```sh
-aws --version
-gcloud --version
-vault --version
-jq --version
-java -version
-go version
-python3 --version
-node --version
-npm --version
-```
-
 ## Customization
 
 If you need to customize the Dockerfile to include additional tools or dependencies, you can modify the `Dockerfile` directly. Here are some common customizations:
@@ -66,7 +53,7 @@ RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
 
 ### Adding New Programming Languages
 
-To add a new programming language, you can include the installation commands in the build stage of the Dockerfile. For example, to add Ruby, you can modify the `Dockerfile` as follows:
+To add a new programming language, you can include the installation commands in the build stage of the Dockerfile. For example, to add Ruby, you can modify the `Dockerfile` as follows(this is just an example ruby is installed already):
 
 ```dockerfile
 # Install Ruby
