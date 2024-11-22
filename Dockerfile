@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     lsb-release \
     jq \
+    vim \
     && rm -rf /var/lib/apt/lists/*
 
 # Install AWS CLI
