@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build-linux:
+  build-images:
     runs-on: ubuntu-latest
     strategy:
       matrix:
