@@ -13,11 +13,40 @@ permissions:
   contents: read
 
 jobs:
-  build-ghcr:
+  build-linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [linux/amd64, linux/arm64]
+        platform: [linux/amd64, linux/arm64, macOS/arm64]
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Set platform tag
+        id: platform_tag
+        run: echo "PLATFORM_TAG=${{ matrix.platform }}" | sed 's/\//-/' >> $GITHUB_ENV
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platform: ${{ matrix.platform }}
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/builder:${{ env.PLATFORM_TAG }}
+
+  build-mac: 
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        platform: [macOS/arm64, macOS/amd64]
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
