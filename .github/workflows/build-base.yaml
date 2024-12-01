@@ -31,7 +31,7 @@ jobs:
 
       - name: Set platform tag
         id: platform_tag
-        run: echo "PLATFORM_TAG=${{ matrix.platform }}" | sed 's/\//-/' >> $GITHUB_ENV
+        run: echo "PLATFORM_TAG=${{ matrix.platform }}" | sed 's/\//-/g' >> $GITHUB_ENV
 
       - name: Build and push
         uses: docker/build-push-action@v6
