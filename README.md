@@ -4,6 +4,8 @@ Builder is a base Dockerfile designed to streamline the development process by p
 
 ## Features
 
+One of the best/worst feature of this project is that the images are rebuilt every day at midnight so they will always have security patches built in.
+
 - **Multi-architecture support**: Supports both `amd64` and `arm64` architectures.
 - **Pre-installed tools**:
   - AWS CLI
@@ -20,22 +22,28 @@ Builder is a base Dockerfile designed to streamline the development process by p
   - Rust
 - **Optimized for size**: Uses multi-stage builds to minimize the final image size.
 
-## Usage
+## Supported Platforms
 
-### Building the Docker Image
+You would download this by doing something like `docker pull ghcr.io/decima-cloud/builder:macOS-amd64`. where the tag could be any supported platform
+Builder supports the following platforms:
+
+- **macOS**:
+  - amd64
+  - arm64
+- **Windows**:
+  - amd64
+  - arm64
+- **Linux**:
+  - amd64
+  - arm64
+  - arm64-v8
+
+### Building the Docker Image Locally
 
 To build the Docker image, run the following command:
 
 ```sh
 docker build -t builder:latest .
-```
-
-### Running the Docker Container
-
-To run a container from the built image, use the following command:
-
-```sh
-docker run -it builder:latest
 ```
 
 ## Customization
